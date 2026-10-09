@@ -9,11 +9,11 @@ type PromptResultProps = {
 
 export default function PromptResult({ data, isPending }: PromptResultProps) {
   return (
-    <div>
-      <h2>Prompt Result</h2>
+    <div className="card">
+      <label className="font-bold">Prompt Result</label>
       {isPending && <p>Loading...</p>}
       {data && (
-        <div className="ai-content">
+        <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-4 my-4">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {data.response}
           </ReactMarkdown>

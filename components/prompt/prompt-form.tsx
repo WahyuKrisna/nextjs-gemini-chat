@@ -10,29 +10,40 @@ type PromptFormProps = {
 
 export default function PromptForm({ onSubmit, isPending }: PromptFormProps) {
   const [text, setText] = useState("")
+  const [emptyInput, setEmptyInput] = useState(false)
 
   function handleSubmit() {
-    if (!text.trim()) return // ignore empty prompts
-    onSubmit(text)
-    setText("") // clear the box
+    if (!text.trim()) {
+        setEmptyInput(true) // ignore empty prompts
+    }else{
+        setEmptyInput(false)
+        onSubmit(text)
+        setText("") // clear the box
+    } 
   }
 
   return (
-    <div className="flex flex-col gap-4 w-full">
-      <h2>Input your Prompt</h2>
+    <div className="card">
+      <label className="font-bold">Input your Prompt</label>
       <textarea
-        className="p-2 rounded border-2 border-gray-500 w-full"
+        className="my-4 bg-white border border-slate-200 rounded-xl w-full p-2"
         value={text}
-        rows={5}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <button
-        className="p-3 bg-blue-500 rounded-xl text-white hover:bg-blue-400 disabled:opacity-50"
-        onClick={handleSubmit}
+        rows={4}
+        placeholder="eg. Give me 3 books recommendation under 200 words"
+        onChange={(e) => {setText(e.target.value); setEmptyInput(false);}}
         disabled={isPending}
-      >
-        {isPending ? "Generating..." : "Generate"}
-      </button>
+      />
+      <div className={emptyInput ? 'text-red-600':'hidden'} >Please fill the prompt</div>
+      <div className="flex justify-end">
+        <button
+            className="bg-indigo-600 text-white rounded-lg px-6 py-2.5 font-semibold hover:bg-indigo-500"
+            onClick={handleSubmit}
+            disabled={isPending}
+        >
+            {isPending ? "Generating..." : "Generate"}
+        </button>
+      </div>
+      
     </div>
   )
 }

@@ -8,17 +8,23 @@ import {usePrompts} from '@/app/hooks/usePrompts'
 export default function Home() {  
 const { history, generate } = usePrompts()
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1 className="text-3xl font-bold text-red-600">AI Prompt Analytics Dashboard</h1>
-        <PromptForm onSubmit={generate.mutate} isPending={generate.isPending} />
-        <PromptResult data={generate.data} isPending={generate.isPending} />
-        <PromptHistory items={history.data ?? []} />
+    <main className="font-[family-name:var(--font-geist-sans)]">
+        <div className="text-xl font-bold text-red-600 bg-white border-b-2 border-slate-200 w-full px-4 py-2">AI Prompt Analytics Dashboard</div>
+        <div className='max-w p-8 grid gap-6 lg:grid-cols-[1.6fr_1fr] items-center sm:items-start'>
+            <PromptForm onSubmit={generate.mutate} isPending={generate.isPending} />
+            
+            <div className='card'>
+                <label>Chart</label>
+            </div>
 
-        <section>Chart</section>
+            <PromptResult data={generate.data} isPending={generate.isPending} />
 
-        <section>Recent Prompts Table</section>
-      </main>
-    </div>
+            <div className='card'>
+                <label>Recent Prompts Table</label>
+            </div>
+
+            <PromptHistory items={history.data ?? []} />
+        </div>
+    </main>
   );
 }

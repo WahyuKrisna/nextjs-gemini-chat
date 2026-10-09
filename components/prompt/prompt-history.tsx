@@ -9,15 +9,14 @@ type PromptHistoryProps = {
 
 export default function PromptResult({ items }: PromptHistoryProps) {
   return (
-    <div>
-      <section>Prompt History</section>
-        {items?.map((item, index) => (
-        <div key={index}>
-            <p><b>Prompt:</b> {item.prompt}</p>
-            <p><b>Response:</b></p>
-            <div className="ai-content">
+    <div className="card">
+      <label className="font-bold">Prompt History</label>
+        {items.slice(1)?.map((item, index) => (
+        <div className="my-4" key={index}>
+            <div className="font-bold">{item.prompt}</div>
+            <div className="text-slate-400">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {item.response}
+                    {item.response.slice(0, 60) + '...'} 
                 </ReactMarkdown>
             </div>
         </div>

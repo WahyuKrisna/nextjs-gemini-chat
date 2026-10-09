@@ -1,10 +1,10 @@
 ## Known issues / TODO
 
-- [ ] Prompt result is duplicated (shown in both "Result" and "History")
-- [ ] Prompt box doesn't clear after generating
-- [ ] Empty prompt still hits the server (validate on the client first)
+- [x] Prompt result is duplicated (shown in both "Result" and "History")
+- [x] Prompt box doesn't clear after generating
+- [x] Empty prompt still hits the server (validate on the client first)
 - [ ] History is lost on refresh (stored only in state)
-- [ ] No styling and not responsive (use Tailwind)
+- [x] No styling and not responsive (use Tailwind)
 - [x] Everything is in one large component (split into form, result, history)
 - [ ] Error handling: `fetch` doesn't check `res.ok`, and failures are untested
 - [ ] No tests
